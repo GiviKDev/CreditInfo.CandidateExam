@@ -11,7 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditInfo.CandidateExam.Co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{DDA3DC20-6BE0-464A-AEF0-339AA77476CD}"
 	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\Data.cs = ..\..\..\..\..\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\Data.cs
 		samples\Data.xsd = samples\Data.xsd
 		samples\Sample.xml = samples\Sample.xml
 	EndProjectSection
