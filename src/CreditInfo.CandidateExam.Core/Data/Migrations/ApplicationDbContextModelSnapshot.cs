@@ -83,7 +83,7 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
 
                     b.HasIndex("ContractId");
 
-                    b.ToTable("Individual");
+                    b.ToTable("Individuals");
                 });
 
             modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.SubjectRole", b =>
@@ -109,7 +109,7 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
 
                     b.HasIndex("ContractId");
 
-                    b.ToTable("SubjectRole");
+                    b.ToTable("SubjectRoles");
                 });
 
             modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.Contract", b =>
@@ -223,7 +223,7 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
 
                             b1.HasKey("IndividualId");
 
-                            b1.ToTable("Individual");
+                            b1.ToTable("Individuals");
 
                             b1.WithOwner()
                                 .HasForeignKey("IndividualId");

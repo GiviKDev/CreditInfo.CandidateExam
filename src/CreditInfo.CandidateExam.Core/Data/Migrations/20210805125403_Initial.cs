@@ -34,7 +34,7 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Individual",
+                name: "Individuals",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -50,9 +50,9 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Individual", x => x.Id);
+                    table.PrimaryKey("PK_Individuals", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Individual_Contracts_ContractId",
+                        name: "FK_Individuals_Contracts_ContractId",
                         column: x => x.ContractId,
                         principalTable: "Contracts",
                         principalColumn: "Id",
@@ -60,7 +60,7 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SubjectRole",
+                name: "SubjectRoles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -72,9 +72,9 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubjectRole", x => x.Id);
+                    table.PrimaryKey("PK_SubjectRoles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SubjectRole_Contracts_ContractId",
+                        name: "FK_SubjectRoles_Contracts_ContractId",
                         column: x => x.ContractId,
                         principalTable: "Contracts",
                         principalColumn: "Id",
@@ -82,23 +82,23 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Individual_ContractId",
-                table: "Individual",
+                name: "IX_Individuals_ContractId",
+                table: "Individuals",
                 column: "ContractId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubjectRole_ContractId",
-                table: "SubjectRole",
+                name: "IX_SubjectRoles_ContractId",
+                table: "SubjectRoles",
                 column: "ContractId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Individual");
+                name: "Individuals");
 
             migrationBuilder.DropTable(
-                name: "SubjectRole");
+                name: "SubjectRoles");
 
             migrationBuilder.DropTable(
                 name: "Contracts");

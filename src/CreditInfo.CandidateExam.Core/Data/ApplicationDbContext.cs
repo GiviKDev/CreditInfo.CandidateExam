@@ -9,6 +9,11 @@ namespace CreditInfo.CandidateExam.Core.Data
     {
         public virtual DbSet<Contract> Contracts { get; set; }
 
+        public virtual DbSet<Individual> Individuals { get; set; }
+
+        public virtual DbSet<SubjectRole> SubjectRoles { get; set; }
+
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

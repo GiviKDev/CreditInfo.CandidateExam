@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CreditInfo.CandidateExam.Core.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210805124622_Initial")]
+    [Migration("20210805125403_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,7 +85,7 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
 
                     b.HasIndex("ContractId");
 
-                    b.ToTable("Individual");
+                    b.ToTable("Individuals");
                 });
 
             modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.SubjectRole", b =>
@@ -111,7 +111,7 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
 
                     b.HasIndex("ContractId");
 
-                    b.ToTable("SubjectRole");
+                    b.ToTable("SubjectRoles");
                 });
 
             modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.Contract", b =>
@@ -225,7 +225,7 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
 
                             b1.HasKey("IndividualId");
 
-                            b1.ToTable("Individual");
+                            b1.ToTable("Individuals");
 
                             b1.WithOwner()
                                 .HasForeignKey("IndividualId");
