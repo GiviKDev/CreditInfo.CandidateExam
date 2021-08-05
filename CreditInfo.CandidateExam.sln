@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditInfo.CandidateExam.We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreditInfo.CandidateExam.Core", "src\CreditInfo.CandidateExam.Core\CreditInfo.CandidateExam.Core.csproj", "{4C0A99BE-97F8-44EE-919B-CFE1884A6B8B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{DDA3DC20-6BE0-464A-AEF0-339AA77476CD}"
+	ProjectSection(SolutionItems) = preProject
+		samples\Data.xsd = samples\Data.xsd
+		samples\Sample.xml = samples\Sample.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
