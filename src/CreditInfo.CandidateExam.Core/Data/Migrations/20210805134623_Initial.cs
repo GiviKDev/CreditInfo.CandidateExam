@@ -37,71 +37,62 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
                 name: "Individuals",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CustomerCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IdentificationNumbers_NationalID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ContractId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    IdentificationNumbers_NationalID = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Individuals", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Individuals_Contracts_ContractId",
-                        column: x => x.ContractId,
-                        principalTable: "Contracts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SubjectRoles",
+                name: "IndividualContracts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ContractId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IndividualId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CustomerCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RoleOfCustomer = table.Column<int>(type: "int", nullable: false),
-                    ContractId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    RoleOfCustomer = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubjectRoles", x => x.Id);
+                    table.PrimaryKey("PK_IndividualContracts", x => new { x.IndividualId, x.ContractId });
                     table.ForeignKey(
-                        name: "FK_SubjectRoles_Contracts_ContractId",
+                        name: "FK_IndividualContracts_Contracts_ContractId",
                         column: x => x.ContractId,
                         principalTable: "Contracts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_IndividualContracts_Individuals_IndividualId",
+                        column: x => x.IndividualId,
+                        principalTable: "Individuals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Individuals_ContractId",
-                table: "Individuals",
-                column: "ContractId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SubjectRoles_ContractId",
-                table: "SubjectRoles",
+                name: "IX_IndividualContracts_ContractId",
+                table: "IndividualContracts",
                 column: "ContractId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Individuals");
-
-            migrationBuilder.DropTable(
-                name: "SubjectRoles");
+                name: "IndividualContracts");
 
             migrationBuilder.DropTable(
                 name: "Contracts");
+
+            migrationBuilder.DropTable(
+                name: "Individuals");
         }
     }
 }

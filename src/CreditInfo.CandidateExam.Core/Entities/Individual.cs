@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using CreditInfo.CandidateExam.Core.Enums;
 
@@ -6,7 +7,7 @@ namespace CreditInfo.CandidateExam.Core.Entities
 {
     public class Individual
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
@@ -22,8 +23,6 @@ namespace CreditInfo.CandidateExam.Core.Entities
 
         public IdentificationNumbers IdentificationNumbers { get; set; }
 
-        public Guid ContractId { get; set; }
-
-        public virtual Contract Contract { get; set; }
+        public virtual ICollection<IndividualContract> IndividualContracts { get; set; } = new HashSet<IndividualContract>();
     }
 }

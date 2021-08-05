@@ -11,7 +11,7 @@ namespace CreditInfo.CandidateExam.Core.Data
 
         public virtual DbSet<Individual> Individuals { get; set; }
 
-        public virtual DbSet<SubjectRole> SubjectRoles { get; set; }
+        public virtual DbSet<IndividualContract> IndividualContracts { get; set; }
 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -44,6 +44,28 @@ namespace CreditInfo.CandidateExam.Core.Data
                 {
                     ot.Property(p => p.Value).HasPrecision(18, 4);
                 });
+            });
+
+            modelBuilder.Entity<Individual>(b =>
+            {
+                b.OwnsOne(t => t.IdentificationNumbers);
+            });
+
+            modelBuilder.Entity<IndividualContract>(b =>
+            {
+                b.HasKey(t => new { t.IndividualId, t.ContractId });
+
+                b.HasOne(t => t.Individual)
+                    .WithMany(t => t.IndividualContracts)
+                    .HasForeignKey(t => t.IndividualId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                b.HasOne(t => t.Contract)
+                    .WithMany(t => t.IndividualContracts)
+                    .HasForeignKey(t => t.ContractId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Restrict);
             });
         }
     }

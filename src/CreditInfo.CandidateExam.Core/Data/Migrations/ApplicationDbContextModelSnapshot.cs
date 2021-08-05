@@ -53,12 +53,8 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
 
             modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.Individual", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<Guid>("ContractId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
@@ -81,17 +77,13 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContractId");
-
                     b.ToTable("Individuals");
                 });
 
-            modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.SubjectRole", b =>
+            modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.IndividualContract", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("IndividualId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ContractId")
                         .HasColumnType("uniqueidentifier");
@@ -99,17 +91,14 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CustomerCode")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("RoleOfCustomer")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("IndividualId", "ContractId");
 
                     b.HasIndex("ContractId");
 
-                    b.ToTable("SubjectRoles");
+                    b.ToTable("IndividualContracts");
                 });
 
             modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.Contract", b =>
@@ -205,18 +194,10 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
 
             modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.Individual", b =>
                 {
-                    b.HasOne("CreditInfo.CandidateExam.Core.Entities.Contract", "Contract")
-                        .WithMany("Individuals")
-                        .HasForeignKey("ContractId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.OwnsOne("CreditInfo.CandidateExam.Core.Entities.IdentificationNumbers", "IdentificationNumbers", b1 =>
                         {
-                            b1.Property<int>("IndividualId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                            b1.Property<Guid>("IndividualId")
+                                .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("NationalID")
                                 .HasColumnType("nvarchar(max)");
@@ -229,27 +210,36 @@ namespace CreditInfo.CandidateExam.Core.Data.Migrations
                                 .HasForeignKey("IndividualId");
                         });
 
-                    b.Navigation("Contract");
-
                     b.Navigation("IdentificationNumbers");
                 });
 
-            modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.SubjectRole", b =>
+            modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.IndividualContract", b =>
                 {
                     b.HasOne("CreditInfo.CandidateExam.Core.Entities.Contract", "Contract")
-                        .WithMany("SubjectRoles")
+                        .WithMany("IndividualContracts")
                         .HasForeignKey("ContractId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("CreditInfo.CandidateExam.Core.Entities.Individual", "Individual")
+                        .WithMany("IndividualContracts")
+                        .HasForeignKey("IndividualId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Contract");
+
+                    b.Navigation("Individual");
                 });
 
             modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.Contract", b =>
                 {
-                    b.Navigation("Individuals");
+                    b.Navigation("IndividualContracts");
+                });
 
-                    b.Navigation("SubjectRoles");
+            modelBuilder.Entity("CreditInfo.CandidateExam.Core.Entities.Individual", b =>
+                {
+                    b.Navigation("IndividualContracts");
                 });
 #pragma warning restore 612, 618
         }

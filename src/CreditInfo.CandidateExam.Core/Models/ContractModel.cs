@@ -3,25 +3,25 @@ using System.Collections.Generic;
 
 using CreditInfo.CandidateExam.Core.Enums;
 
-namespace CreditInfo.CandidateExam.Core.Entities
+namespace CreditInfo.CandidateExam.Core.Models
 {
-    public class Contract
+    public class ContractModel
     {
         public Guid Id { get; set; }
 
-        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+        public DateTime CreatedDate { get; set; }
 
         public string ContractCode { get; set; }
 
         public PhaseOfContract PhaseOfContract { get; set; }
 
-        public Amount OriginalAmount { get; set; }
+        public AmountModel OriginalAmount { get; set; }
 
-        public Amount InstallmentAmount { get; set; }
+        public AmountModel InstallmentAmount { get; set; }
 
-        public Amount CurrentBalance { get; set; }
+        public AmountModel CurrentBalance { get; set; }
 
-        public Amount OverdueBalance { get; set; }
+        public AmountModel OverdueBalance { get; set; }
 
         public DateTime DateOfLastPayment { get; set; }
 
@@ -30,7 +30,5 @@ namespace CreditInfo.CandidateExam.Core.Entities
         public DateTime DateAccountOpened { get; set; }
 
         public DateTime RealEndDate { get; set; }
-
-        public virtual ICollection<IndividualContract> IndividualContracts { get; set; } = new HashSet<IndividualContract>();
     }
 }

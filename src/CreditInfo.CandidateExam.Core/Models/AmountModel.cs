@@ -1,10 +1,8 @@
 ﻿using CreditInfo.CandidateExam.Core.Enums;
 
-using Microsoft.EntityFrameworkCore;
-
-namespace CreditInfo.CandidateExam.Core.Entities
+namespace CreditInfo.CandidateExam.Core.Models
 {
-    public class Amount
+    public class AmountModel
     {
         public decimal Value { get; set; }
 
