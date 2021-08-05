@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using CreditInfo.CandidateExam.Core.Managers;
 using CreditInfo.CandidateExam.Core.Models;
 
 using Microsoft.AspNetCore.Mvc;
@@ -14,17 +15,26 @@ namespace CreditInfo.CandidateExam.WebApi.Controllers
     [Route("[controller]")]
     public class ContractsController : ControllerBase
     {
+        private readonly IIndividualContractManager _individualContractManager;
         private readonly ILogger<ContractsController> _logger;
 
-        public ContractsController(ILogger<ContractsController> logger)
+        public ContractsController(IIndividualContractManager individualContractManager, ILogger<ContractsController> logger)
         {
+            _individualContractManager = individualContractManager;
             _logger = logger;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IndividualContractModel> Get(Guid id)
+        [HttpGet]
+        public async Task<ActionResult<IndividualContractModel>> Get(string nationalID)
         {
-            return await Task.FromResult(new IndividualContractModel());
+            var result = await _individualContractManager.GetAsync(new IdentificationNumbersModel(nationalID));
+
+            if (result is null)
+            {
+                return NotFound();
+            }
+
+            return result;
         }
     }
 }
