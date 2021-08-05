@@ -6,7 +6,7 @@ namespace CreditInfo.CandidateExam.Core.Models
 {
     public class IndividualContractModel
     {
-        public DateTime CreatedDate { get; set; } 
+        public DateTime CreatedDate { get; set; }
 
         public RoleOfCustomer RoleOfCustomer { get; set; }
 

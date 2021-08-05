@@ -1,7 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-
-namespace CreditInfo.CandidateExam.Core.Entities
+﻿namespace CreditInfo.CandidateExam.Core.Entities
 {
     public class IdentificationNumbers
     {

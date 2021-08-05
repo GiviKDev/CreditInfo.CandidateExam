@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using CreditInfo.CandidateExam.Core.Enums;
 
